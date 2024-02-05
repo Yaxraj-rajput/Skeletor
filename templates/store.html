@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/styles/style.css" />
+  </head>
+  <body>
+    {% include './ui/navbar.html' %}
+
+    <div class="store-main-container">
+      <h1 class="products-title">Our Products</h1>
+
+      <div class="products-div">
+        {% for product in products %}
+        <div class="card">
+          <div class="image-div">
+            <img
+              src="{{ url_for('static', filename='uploads/' + product.image) }}"
+              alt="Product Image"
+            />
+          </div>
+          <div class="details-div">
+            <div class="left"><h1>{{product.name}}</h1></div>
+            <div class="right">
+              <span class="price">₹{{product.cr_price}}</span>
+              <a href="product/{{product.id}}">
+                <button class="buy-btn">buy</button></a
+              >
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% include './ui/footer.html' %}
+  </body>
+</html>

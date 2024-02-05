@@ -1,0 +1,664 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,600;1,700;1,800&display=swap");
+
+$background-color: #000;
+$black: #000;
+$white: #fff;
+$link-unfocused: #fff;
+$link-focused: #dadada;
+$text-white: #fff;
+$text-black: #000;
+$background-color-light: #fefeff;
+$card-background: #dfdede;
+$transparent-black: #00000060;
+$grey-font: #363636;
+$white-box: #f2f2f2;
+$accent-blue: #303f9f;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+.product-div-main-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+
+  .product-container-sub {
+    width: 93%;
+    padding: 1.5rem;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+
+    .images-div {
+      position: sticky;
+
+      top: 2rem;
+      width: 55%;
+      height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+
+      .top {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+
+        .card {
+          flex: 1;
+          border-radius: 0.4rem;
+          background-color: $card-background;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          aspect-ratio: 1/1;
+        }
+
+        img {
+          width: 80%;
+          mix-blend-mode: multiply;
+        }
+      }
+
+      .bottom {
+        width: 100%;
+        height: 100%;
+        border-radius: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        background-color: $card-background;
+        img {
+          mix-blend-mode: multiply;
+          width: 70%;
+        }
+      }
+    }
+    form {
+      width: 45%;
+
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+
+      .details-div {
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        .product-title {
+          font-size: 1.7rem;
+        }
+
+        .product-price {
+          display: block;
+          font-size: 1.3rem;
+        }
+
+        .rating-div {
+          display: flex;
+          flex-direction: row;
+          gap: 0.5rem;
+          align-items: center;
+          font-size: 1.2rem;
+          color: $grey-font;
+
+          .stars {
+            display: flex;
+            flex-direction: row;
+            gap: 0.2rem;
+
+            img {
+              width: 2.5rem;
+            }
+          }
+        }
+
+        .preference-selection {
+          width: 100%;
+
+          span {
+            color: $grey-font;
+            display: block;
+            margin-top: 2rem;
+            font-weight: 500;
+          }
+
+          ul {
+            margin-top: 1rem;
+            width: 100%;
+            display: flex;
+
+            list-style: none;
+            flex-wrap: wrap;
+
+            .switches-select label {
+              background: transparent;
+              display: inline-block;
+              text-align: center;
+              padding: 0.8rem 1rem;
+              text-transform: capitalize;
+              background-color: $card-background;
+              border-radius: 0.7rem;
+              font-weight: 500;
+
+              z-index: 20;
+              color: #222;
+
+              transition: 0.15s ease all;
+            }
+            .switches-select label.active,
+            .switches-select label.active:hover,
+            .switches-select label.active:active {
+              background: $black;
+              color: #fff;
+            }
+            .switches-select label:hover,
+            .switches-select label:active {
+              background: #e7e7e7;
+            }
+            .switches-select input[type="radio"] {
+              position: absolute;
+              clip: rect(0, 0, 0, 0);
+              pointer-events: none;
+            }
+
+            // .switches-select .radio-inline + .radio-inline {
+            //   margin: 0.5rem;
+            // }
+
+            .switches-select2 label {
+              display: inline-block;
+              background: transparent;
+              text-align: center;
+              padding: 0.8rem 1rem;
+              text-transform: capitalize;
+              background-color: $card-background;
+              border-radius: 0.7rem;
+              font-weight: 500;
+              z-index: 20;
+              color: #222;
+
+              transition: 0.15s ease all;
+            }
+            .switches-select2 label.active,
+            .switches-select2 label.active:hover,
+            .switches-select2 label.active:active {
+              background: $black;
+              color: #fff;
+            }
+            .switches-select2 label:hover,
+            .switches-select2 label:active {
+              background: #e7e7e7;
+            }
+            .switches-select2 input[type="radio"] {
+              position: absolute;
+              clip: rect(0, 0, 0, 0);
+              pointer-events: none;
+              text-transform: capitalize;
+            }
+
+            // .switches-select2 .radio-inline + .radio-inline {
+            //   margin-left: 0.7rem;
+            // }
+
+            button {
+              padding: 0.7rem 1rem;
+              background-color: $transparent-black;
+              border-radius: 0.5rem;
+              border: none;
+
+              a {
+                text-decoration: none;
+                color: $white;
+              }
+            }
+          }
+        }
+        .purchase-div {
+          height: 3rem;
+          display: flex;
+          justify-content: space-between;
+
+          .left {
+            display: flex;
+            flex-direction: row;
+            width: 30%;
+
+            height: 100%;
+
+            input {
+              width: 100%;
+              background-color: $white;
+              outline: none;
+              text-align: center;
+              font-size: 1rem;
+              border-top: 1px solid $black;
+              border-bottom: 1px solid $black;
+              border-left: none;
+              min-width: 2rem;
+              border-right: none;
+            }
+
+            a:nth-child(1) {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 100%;
+              padding: 0rem 0.6rem;
+              border-radius: 8px 0px 0px 8px;
+              background-color: $white;
+              font-size: 1.5rem;
+              border: 1px solid $black;
+              transition: 0.1s ease-out;
+
+              &:hover {
+                background-color: $black;
+                color: $white;
+              }
+            }
+            a:nth-child(3) {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 100%;
+              padding: 0rem 0.6rem;
+              border-radius: 0px 8px 8px 0px;
+              background-color: $white;
+              font-size: 1.5rem;
+              border: 1px solid $black;
+
+              transition: 0.1s ease-out;
+
+              &:hover {
+                background-color: $black;
+                color: $white;
+              }
+            }
+          }
+
+          .right {
+            width: 60%;
+
+            button {
+              width: 100%;
+              height: 100%;
+              background-color: #303f9f;
+              background-size: 200% auto;
+              border: none;
+              box-shadow: 0 0 20px #eee;
+              color: $white;
+              transition: 0.3s ease-out;
+              border-radius: 10px;
+              font-size: 1.1rem;
+
+              &:hover {
+                background-position: right center; /* change the direction of the change here */
+              }
+            }
+          }
+        }
+
+        .info-div {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+          width: 100%;
+          border: 2px solid $black;
+          border-radius: 1.2rem;
+          background-color: $white;
+          padding: 1.2rem;
+          text-align: justify;
+
+          h3 {
+            font-size: 1.5rem;
+          }
+
+          p {
+            font-size: 1.1rem;
+            opacity: 80%;
+            margin-top: 0.5rem;
+          }
+        }
+        .description-div {
+          width: 100%;
+          border: 2px solid $black;
+          border-radius: 1.2rem;
+          background-color: $white;
+          padding: 1.2rem;
+          text-align: justify;
+
+          h3 {
+            font-size: 1.5rem;
+          }
+
+          p {
+            font-size: 1.1rem;
+            opacity: 80%;
+            margin-top: 0.5rem;
+          }
+        }
+
+        .product-content-div {
+          width: 100%;
+          border: 2px solid $black;
+          border-radius: 1.2rem;
+          background-color: $white;
+          padding: 1.2rem;
+          text-align: justify;
+
+          h3 {
+            font-size: 1.5rem;
+          }
+
+          ul {
+            list-style: none;
+
+            font-size: 1.1rem;
+            opacity: 80%;
+            margin-top: 0.5rem;
+
+            li {
+              text-transform: capitalize;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1800px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .store-main-container {
+    .products-div {
+      width: 85vw;
+
+      grid-template-columns: 2fr 2fr 2fr;
+    }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  html,
+  body {
+    overflow-x: hidden;
+    background-color: $black;
+  }
+  .product-div-main-container {
+    padding: 0rem;
+    .product-container-sub {
+      margin-top: 0rem;
+      width: 100%;
+      padding: 0rem;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .images-div {
+        width: 100%;
+        height: 50vh;
+        .top {
+          height: 100%;
+          overflow-x: scroll;
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          padding: 1rem;
+          grid-template-columns: 1fr 1fr;
+          scroll-snap-type: x mandatory; /* Enable horizontal scroll snap */
+          scroll-behavior: smooth; /* Enable smooth scrolling */
+          white-space: nowrap; /* Prevent items from wrapping to new lines */
+          scroll-snap-align: center;
+
+          .card {
+            width: 100%;
+            scroll-snap-align: center;
+          }
+
+          &::-webkit-scrollbar {
+            height: 5px;
+          }
+
+          &::-webkit-scrollbar-track {
+            background: #ffffff36;
+          }
+
+          &::-webkit-scrollbar-thumb {
+            background: #888;
+          }
+
+          &::-webkit-scrollbar-thumb:hover {
+            background: #555;
+          }
+        }
+
+        .bottom {
+          display: none;
+        }
+      }
+      form {
+        width: 100%;
+
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        .details-div {
+          border-radius: 2rem 2rem 0rem 0rem;
+          width: 100%;
+          background-color: $white;
+          padding: 2rem;
+
+          .product-title {
+            font-size: 1.7rem;
+            // margin-top: 0rem;
+          }
+
+          .preference-selection {
+            width: 100%;
+
+            ul {
+              margin-top: 1rem;
+              width: 100%;
+              display: flex;
+
+              list-style: none;
+              flex-wrap: wrap;
+
+              .switches-select label {
+                padding: 0.6rem 0.8rem;
+              }
+              .switches-select .radio-inline + .radio-inline {
+                margin-top: 0.3rem;
+              }
+
+              .switches-select2 label {
+                padding: 0.6rem 0.8rem;
+              }
+              .switches-select2 .radio-inline + .radio-inline {
+                margin-top: 0.3rem;
+              }
+            }
+          }
+
+          .purchase-div {
+            margin-top: 2rem;
+
+            height: 3rem;
+            display: flex;
+            justify-content: space-between;
+
+            .left {
+              display: flex;
+              flex-direction: row;
+              width: 30%;
+
+              height: 100%;
+
+              input {
+                width: 100%;
+                background-color: $white;
+                outline: none;
+                text-align: center;
+                font-size: 1rem;
+                border-top: 1px solid $black;
+                border-bottom: 1px solid $black;
+                border-left: none;
+                min-width: 2rem;
+                border-right: none;
+              }
+
+              button:nth-child(1) {
+                height: 100%;
+                padding: 0rem 0.4rem;
+                border-radius: 8px 0px 0px 8px;
+                background-color: $white;
+                font-size: 1.5rem;
+                border: 1px solid $black;
+                display: block;
+                transition: 0.1s ease-out;
+
+                &:hover {
+                  background-color: $black;
+                  color: $white;
+                }
+              }
+              button:nth-child(3) {
+                height: 100%;
+                padding: 0rem 0.4rem;
+                border-radius: 0px 8px 8px 0px;
+                background-color: $white;
+                font-size: 1.5rem;
+                border: 1px solid $black;
+                display: block;
+
+                transition: 0.1s ease-out;
+
+                &:hover {
+                  background-color: $black;
+                  color: $white;
+                }
+              }
+            }
+
+            .right {
+              width: 60%;
+
+              button {
+                width: 100%;
+                height: 100%;
+                background-color: $accent-blue;
+                background-size: 200% auto;
+                border: none;
+                box-shadow: 0 0 20px #eee;
+                color: $white;
+                transition: 0.3s ease-out;
+                border-radius: 10px;
+                font-size: 1.1rem;
+
+                &:hover {
+                  background-position: right center; /* change the direction of the change here */
+                }
+              }
+            }
+          }
+          .description-div {
+            margin-top: 2rem;
+            width: 100%;
+            border: 2px solid $black;
+            border-radius: 1.2rem;
+            background-color: $white;
+            padding: 1.2rem;
+            text-align: justify;
+
+            h3 {
+              font-size: 1.5rem;
+            }
+
+            p {
+              font-size: 1.1rem;
+              opacity: 80%;
+              margin-top: 0.5rem;
+            }
+          }
+
+          .product-content-div {
+            margin-top: 2rem;
+            width: 100%;
+            border: 2px solid $black;
+            border-radius: 1.2rem;
+            background-color: $white;
+            padding: 1.2rem;
+            text-align: justify;
+
+            h3 {
+              font-size: 1.5rem;
+            }
+
+            ul {
+              list-style: none;
+
+              font-size: 1.1rem;
+              opacity: 80%;
+              margin-top: 0.5rem;
+
+              li {
+                text-transform: capitalize;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .store-main-container {
+    .products-title {
+      margin-top: 10rem;
+    }
+    .products-div {
+      width: 85vw;
+
+      grid-template-columns: 2fr;
+    }
+  }
+}
+::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888; /* Set the color of the scrollbar thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+.images-div::-webkit-scrollbar {
+  height: 0em;
+}
