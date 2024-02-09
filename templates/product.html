@@ -47,6 +47,8 @@
             <h2 class="product-title">{{product.name}}</h2>
             <span class="product-price">INR ₹{{product.cr_price}}</span>
             <div class="rating-div">
+              <span>Reviewed By: {{product.product_rating_count}} users</span
+              ><br />
               <div class="stars">
                 {% for i in range(product.product_rating) %}
                 <img src="../static/images/elements/star.png" alt="" />
@@ -106,6 +108,12 @@
             </div>
             <div class="info-div">
               <span style="font-weight: bold"
+                >Shelf Life:
+                <span style="font-weight: 400"
+                  >{{product.shelf_life}}</span
+                ></span
+              >
+              <span style="font-weight: bold"
                 >Category:
                 <span style="font-weight: 400">{{product.category}}</span></span
               >
@@ -125,12 +133,6 @@
                   >{{product.product_model}}</span
                 ></span
               >
-            </div>
-            <div style="width: 100%; height: 40rem" class="chart-container">
-              <canvas
-                style="width: 100%; height: 100%"
-                id="priceChart"
-              ></canvas>
             </div>
           </div>
         </form>
@@ -154,43 +156,6 @@
         inputElement.value = currentValue - 1;
       }
     }
-  </script>
-
-  <script>
-    var ctx = document.getElementById("priceChart").getContext("2d");
-    var chart = new Chart(ctx, {
-      type: "line",
-      data: {
-        labels: [
-          "Current Price",
-          "First Competitors Price",
-          "Second Competitors Price",
-          "Average market Price",
-        ],
-        datasets: [
-          {
-            label: "Price",
-            data: [
-              "{{product.cr_price}}",
-              "{{product.first_cr_price}}",
-              "{{product.second_cr_price}}",
-              "{{product.am_price}}",
-            ],
-            backgroundColor: "rgba(75, 192, 192, 0.2)",
-            borderColor: "rgba(75, 192, 192, 1)",
-            borderWidth: 1,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        scales: {
-          y: {
-            beginAtZero: true,
-          },
-        },
-      },
-    });
   </script>
 
   <script>

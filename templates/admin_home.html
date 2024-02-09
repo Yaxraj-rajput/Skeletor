@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/styles/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    {% include './ui/navbar.html' %}
+
+    <div class="admin-container">
+      {% include './ui/sidebar.html' %}
+
+      <div class="admin-content">
+        <div class="products">
+          {% for product in products %}
+          <div class="card">
+            <div class="image-div">
+              <img
+                src="{{ url_for('static', filename='uploads/' + product.image) }}"
+                alt="Product Image"
+              />
+            </div>
+            <div class="details-div">
+              <div class="top">
+                <a href="/analytics/{{product.id}}"
+                  ><h1>{{product.name}}</h1></a
+                >
+              </div>
+              <div class="bottom">
+                <div class="prices">
+                  <span class="price"
+                    >Current Price: ₹{{product.cr_price}}</span
+                  >
+                  <span class="price"
+                    >Current Market Price: ₹{{product.am_price}}</span
+                  >
+                  <span class="price"
+                    >First Competitor Price: ₹{{product.first_cr_price}}</span
+                  >
+                  <span class="price"
+                    >Second Competitor Price: ₹{{product.second_cr_price}}</span
+                  >
+                </div>
+                <div class="stocks">
+                  <span
+                    class="stock"
+                    {%
+                    if
+                    product.stock<5
+                    %}
+                    style="color: red"
+                    {%
+                    endif
+                    %}
+                    >Stock: {{product.stock}}</span
+                  >
+                  <span class="stock">Amount Sold: {{product.amt_sold}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% include './ui/footer.html' %}
+      </div>
+    </div>
+  </body>
+</html>

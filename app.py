@@ -1,7 +1,10 @@
 from flask import Flask, abort, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import text
+from sqlalchemy import text, desc
 import os
+from datetime import datetime
+now = datetime.now()
+
 from werkzeug.utils import secure_filename
 
 # Initialize Flask app
@@ -39,14 +42,13 @@ class products(db.Model):
     image = db.Column(db.String(50), nullable=False)
     product_images = db.Column(db.String(50), nullable=False)
     description = db.Column(db.String(50), nullable=False)
+    shelf_life = db.Column(db.Integer, nullable=False)
+    date_added = db.Column(db.String(50), nullable=False)
 
-# Define route for the homepage
-@app.route('/')
-def index():
-    return "Hello World!"
+
 
 # Define route for the home page
-@app.route('/home')
+@app.route('/')
 def home():
     return render_template('home.html')
 
@@ -56,7 +58,7 @@ def store():
     # Commit any pending database changes
     db.session.commit()
     # Retrieve all products from the database
-    products_list = products.query.all()
+    products_list = products.query.order_by(desc(products.amt_sold)).all()
     # Render the store template with the list of products
     return render_template('store.html', products=products_list)
 
@@ -107,14 +109,18 @@ def addproduct():
         what_in_box = request.form['what_in_box']
         seller_name = request.form['seller_name']
         product_rating = int(request.form['product_rating'])
-        
+        product_rating_count = int(request.form['product_rating_count'])
+        current_month = now.month
+        current_year = now.year
+        date_added = f"{current_month}/{current_year}"   
         category = request.form['category']
         product_model = request.form['product_model']
+        shelf_life = request.form['shelf_life']
         description = request.form['description']
         # Concatenate uploaded image filenames into a string
         product_images = ','.join(filenames)
         # Create a new product object
-        product = products(name=name, cr_price=((am_price+first_cr_price+second_cr_price)/3), am_price=am_price, first_cr_price=first_cr_price, second_cr_price=second_cr_price, image=filenames[0], product_images=product_images, description=description, amt_sold=amt_sold, stock=stock, brand=brand, what_in_box=what_in_box, seller_name=seller_name, product_rating=product_rating, product_rating_count=0 ,category=category, product_model=product_model)        
+        product = products(name=name, cr_price=((am_price+first_cr_price+second_cr_price)/3), am_price=am_price, first_cr_price=first_cr_price, second_cr_price=second_cr_price, image=filenames[0], product_images=product_images, description=description, amt_sold=amt_sold, stock=stock, brand=brand, what_in_box=what_in_box, seller_name=seller_name, product_rating=product_rating, date_added=date_added, shelf_life=shelf_life, product_rating_count=product_rating_count ,category=category, product_model=product_model)        
         # Add the new product to the database session
         db.session.add(product)
         # Commit the changes to the database
@@ -124,7 +130,27 @@ def addproduct():
     # Render the addproduct template for GET requests
     return render_template('addproduct.html')
 
+
+@app.route('/admin_home')
+def admin_home():
+    # Commit any pending database changes
+    db.session.commit()
+    # Retrieve all products from the database
+    products_list = products.query.order_by(desc(products.amt_sold)).all()
+
+    # Render the store template with the list of products
+    return render_template('admin_home.html', products=products_list)
+
+
+@app.route('/analytics/<int:id>')
+def analytics(id):
+    product = products.query.get(id)
+    if product is None:
+        abort(404)
+    return render_template('analytics.html', product=product)
+
 #Define triggers to update cr_price after insert and update operations
+
 with app.app_context():
     with db.engine.connect() as connection:
         connection.execute(text("""
@@ -137,16 +163,20 @@ with app.app_context():
           WHERE id = NEW.id;
         END;
         """))
+
         connection.execute(text("""
         CREATE TRIGGER IF NOT EXISTS calculate_cr_price_update
         AFTER UPDATE ON products
         FOR EACH ROW
         BEGIN
           UPDATE products
-          SET cr_price = (NEW.am_price + NEW.first_cr_price + NEW.second_cr_price) / 3
+          SET cr_price = MAX(NEW.am_price, ((NEW.am_price + NEW.first_cr_price + NEW.second_cr_price) / 3) * (1 - NEW.stock * 0.05))
           WHERE id = NEW.id;
         END;
         """))
+
+       
+      
 
 # Run the Flask application
 if __name__ == '__main__':

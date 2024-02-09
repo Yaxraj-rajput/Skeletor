@@ -3,55 +3,80 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
     <link rel="stylesheet" href="../static/styles/style.css" />
+    <title>Document</title>
   </head>
   <body>
     {% include './ui/navbar.html' %}
 
-    <div class="add-product-main">
-      <div class="add-product-container">
-        <h1>Add Product</h1>
-        <form action="/addproduct" method="POST" enctype="multipart/form-data">
-          <input type="text" name="name" placeholder="Name" />
-          <input type="number" name="cr_price" placeholder="Current Price" />
+    <div class="admin-container">
+      {% include './ui/sidebar.html' %}
 
-          <input type="number" name="am_price" placeholder="AM Price" />
-          <input
-            type="number"
-            name="first_cr_price"
-            placeholder="First CR Price"
-          />
-          <input
-            type="number"
-            name="second_cr_price"
-            placeholder="Second CR Price"
-          />
-          <input type="text" name="description" placeholder="description" />
-          <input type="number" name="amt_sold" placeholder="amountsold" />
-          <input type="text" name="category" placeholder="Category" />
-          <input type="text" name="product_model" placeholder="model" />
-          <input type="text" name="product_brand" placeholder="brand" />
-          <input type="number" name="stock" placeholder="Stock" />
-          <input
-            type="text"
-            name="what_in_box"
-            placeholder="whats's in the box"
-          />
-          <input type="text" name="seller_name" placeholder="seller name" />
-          <input
-            type="number"
-            name="product_rating"
-            placeholder="product rating"
-          />
+      <div class="admin-content">
+        <div class="add-product-main">
+          <div class="add-product-container">
+            <h1>Add Product</h1>
+            <form
+              action="/addproduct"
+              method="POST"
+              enctype="multipart/form-data"
+            >
+              <input type="text" name="name" placeholder="Name" />
+              <input
+                type="number"
+                name="cr_price"
+                placeholder="Current Price"
+              />
 
-          <input type="file" name="image" placeholder="Image" />
-          <input type="file" multiple name="images" />
-          <button type="submit">Add</button>
-        </form>
+              <input type="number" name="am_price" placeholder="AM Price" />
+              <input
+                type="number"
+                name="first_cr_price"
+                placeholder="First CR Price"
+              />
+              <input
+                type="number"
+                name="second_cr_price"
+                placeholder="Second CR Price"
+              />
+              <input type="text" name="description" placeholder="description" />
+              <input type="number" name="amt_sold" placeholder="amountsold" />
+              <input type="text" name="category" placeholder="Category" />
+              <input type="text" name="product_model" placeholder="model" />
+              <input type="text" name="product_brand" placeholder="brand" />
+              <input type="number" name="stock" placeholder="Stock" />
+              <input
+                type="text"
+                name="what_in_box"
+                placeholder="whats's in the box"
+              />
+              <input type="text" name="seller_name" placeholder="seller name" />
+              <input
+                type="number"
+                name="product_rating"
+                value="4"
+                hidden
+                placeholder="product rating"
+              />
+
+              <input
+                type="number"
+                name="product_rating_count"
+                value="15"
+                hidden
+                placeholder="product rating count"
+              />
+
+              <input type="number" name="shelf_life" placeholder="Shelf Life" />
+
+              <input type="file" name="image" placeholder="Image" />
+              <input type="file" multiple name="images" />
+              <button type="submit">Add</button>
+            </form>
+          </div>
+        </div>
+        {% include './ui/footer.html' %}
       </div>
     </div>
-
-    {% include './ui/footer.html' %}
   </body>
 </html>

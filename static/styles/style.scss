@@ -365,3 +365,126 @@ footer {
     }
   }
 }
+
+.sidebar {
+  width: 20%;
+  height: 100vh;
+  background-color: $background-color;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  align-items: center;
+
+  .sidebar-header h1 {
+    color: $white;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    ul {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      list-style: none;
+      align-items: center;
+      gap: 1rem;
+
+      li {
+        display: block;
+        width: 100%;
+        padding: 1rem 0rem;
+        background-color: rgb(255, 255, 255);
+        text-align: center;
+        border-radius: 0.5rem;
+
+        width: 100%;
+        a {
+          color: #000;
+          text-decoration: none;
+          transition: 0.2s ease-in-out;
+
+          &:hover {
+            color: $link-focused;
+          }
+        }
+      }
+    }
+  }
+}
+
+.admin-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+
+  .admin-content {
+    width: 80%;
+    padding: 2rem;
+    overflow-y: scroll;
+
+    .products {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+
+      .card {
+        width: 100%;
+        display: flex;
+        height: 15rem;
+        background-color: $card-background;
+        padding: 1rem;
+        border-radius: 0.7rem;
+
+        .image-div {
+          height: 100%;
+          overflow: hidden;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 0.5rem;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+
+        .details-div {
+          padding: 1rem;
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+
+          .bottom {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+
+            span {
+              font-size: 1.2rem;
+              padding: 0.2rem;
+              background-color: #0000003d;
+              border-radius: 0.5rem;
+            }
+
+            .stocks {
+              font-size: 1.2rem;
+              margin-top: 1rem;
+              border-radius: 0.5rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
