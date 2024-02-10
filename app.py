@@ -170,11 +170,12 @@ with app.app_context():
         FOR EACH ROW
         BEGIN
           UPDATE products
-          SET cr_price = MAX(NEW.am_price, ((NEW.am_price + NEW.first_cr_price + NEW.second_cr_price) / 3) * (1 - NEW.stock * 0.05))
+          SET cr_price = MAX(NEW.am_price, ((NEW.am_price + NEW.first_cr_price + NEW.second_cr_price) / 3) * (1 - NEW.stock * 0.05)) 
           WHERE id = NEW.id;
         END;
         """))
 
+       
        
       
 
