@@ -4,6 +4,8 @@ from sqlalchemy import text, desc
 import os
 from datetime import datetime
 now = datetime.now()
+import requests
+
 
 from werkzeug.utils import secure_filename
 
@@ -45,6 +47,42 @@ class products(db.Model):
     shelf_life = db.Column(db.Integer, nullable=False)
     date_added = db.Column(db.String(50), nullable=False)
 
+
+@app.route('/fetch_data')
+def fetch_data():
+    # Define the API endpoint and parameters
+    url = "https://api.walmart.com/v3/items"
+    params = {
+        "apiKey": "your_api_key_here",
+        "categoryId": "976759",
+        "count": "10"
+    }
+
+    try:
+        # Send a GET request to the Walmart API
+        response = requests.get(url, params=params)
+        
+        # Check if the request was successful (status code 200)
+        if response.status_code == 200:
+            # Convert the response to JSON format
+            data = response.json()
+            
+            # Extract product information
+            products = []
+            for item in data.get("items", []):
+                product = {
+                    "name": item.get("name"),
+                    "price": item.get("salePrice"),
+                    "url": item.get("productUrl")
+                }
+                products.append(product)
+            
+            # Render the template with the product data
+            return render_template('index.html', products=products)
+        else:
+            return "Failed to fetch data. Status code: {}".format(response.status_code)
+    except Exception as e:
+        return "An error occurred: {}".format(str(e))
 
 
 # Define route for the home page
